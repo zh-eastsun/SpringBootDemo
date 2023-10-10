@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Design your taco!</h1>
-    <form method="post" th:object="${design}">
+    <form method="post" th:object="${taco}">
         <div class="grid">
             <div class="ingredient-group" id="wraps">
                 <h3>Designate your wrap:</h3>
@@ -50,7 +50,7 @@
         </div>
         <div>
             <h3>Name your taco creation:</h3>
-<!--            <input type="text" th:field="*{name}"/><br/>-->
+            <input type="text" th:field="*{name}"/><br/>
             <button>Submit your taco</button>
         </div>
     </form>
