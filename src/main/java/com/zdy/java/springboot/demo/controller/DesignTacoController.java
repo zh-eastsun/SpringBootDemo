@@ -2,9 +2,11 @@ package com.zdy.java.springboot.demo.controller;
 
 import com.zdy.java.springboot.demo.bean.Ingredient;
 import com.zdy.java.springboot.demo.bean.Taco;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -44,7 +46,10 @@ public class DesignTacoController {
     }
 
     @PostMapping("/design")
-    public String processTaco(Taco taco) {
+    public String processTaco(@Valid @ModelAttribute("taco") Taco taco, Errors errors) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
         log.debug("Processing taco: " + taco);
         return "redirect:/orders/current";
     }
