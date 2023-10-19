@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public class JdbcIngredientRepository implements IngredientRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
@@ -33,7 +33,11 @@ public class JdbcIngredientRepository implements IngredientRepository {
 
     @Override
     public Ingredient save(Ingredient ingredient) {
-        return null;
+        jdbcTemplate.update("insert into Ingredient (id, name, type) values (?, ?, ?)",
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getType().toString());
+        return ingredient;
     }
 
     private Ingredient mapRowToIngredient(ResultSet row, int rowNum) throws SQLException {
